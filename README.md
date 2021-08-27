@@ -1,4 +1,4 @@
-# mac5832-aprendizado-maquina
-MAC 5832 - Introdução ao Aprendizado de Máquina
+# mac5920-processamento-sinais-digitais
+MAC 5920 - Introdução ao Processamento de Sinais Digitais
 
-Primeiro Semestre de 2021
+Segundo Semestre de 2021
