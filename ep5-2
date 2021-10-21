@@ -1,0 +1,49 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Thu Oct 21 19:16:55 2021
+
+@author: ciro
+"""
+
+# importa dependências da tarefa
+import math
+import numpy as np
+#import matplotlib.pyplot as plt
+#from scipy.fft import fft, ifft
+
+def convolucao_linear(x,h):
+    N = len(x)
+    L = len(h)
+    y = np.zeros(N + L)
+    
+    xExtended = np.concatenate((np.zeros(L), x, np.zeros(L)))
+    
+    for n in range(len(y)):
+        for m in range(L):
+            y[n] += h[m] * xExtended[n + m]
+    
+    y = y[1:]
+    return(y)
+
+N = 1000
+L = 31
+
+x = np.zeros(N)
+ns = np.arange(N)
+
+for n in ns:
+    x[n] = np.sin(2*math.pi * n/N) + (1/math.sqrt(5)) * \
+    np.sin(2*math.pi * 5 * n/N) + (1/math.sqrt(50))   * \
+    np.sin(2*math.pi * 50 * n/N)
+    
+h = np.zeros(L)
+for i in range(L):
+    h[i] = 1 / L
+
+y = convolucao_linear(x, h)
+
+# comparação com a implementação de referência:
+y_alt = np.convolve(x,h)
+assert (np.linalg.norm(y-y_alt)<1e-8)
+print("resultado correto!")
